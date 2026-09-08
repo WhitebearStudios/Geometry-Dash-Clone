@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: bb2a01e22a16233429469e99b53a0985
+guid: c6e7c5b731e115a4eb0a08dd465f0a74
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2367884239174609915
-    second: back-fade_0
-  - first:
-      213: 8250508355158696637
-    second: back-fade_1
-  - first:
-      213: 3367214121627386912
-    second: back-fade_2
+      213: 2635411587043848280
+    second: geometry-64_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: back-fade_0
+      name: geometry-64_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1922
-        height: 722
+        width: 47
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 50450ce74d5932fd0800000000000000
-      internalID: -2367884239174609915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: back-fade_1
-      rect:
-        serializedVersion: 2
-        x: 238
-        y: 0
-        width: 164
-        height: 162
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: db260adc2a1bf7270800000000000000
-      internalID: 8250508355158696637
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: back-fade_2
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 0
-        width: 218
-        height: 218
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0248742476fbabe20800000000000000
-      internalID: 3367214121627386912
+      spriteID: 85072ba10ecd29420800000000000000
+      internalID: 2635411587043848280
       vertices: []
       indices: 
       edges: []
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      back-fade_0: -2367884239174609915
-      back-fade_1: 8250508355158696637
-      back-fade_2: 3367214121627386912
+      geometry-64_0: 2635411587043848280
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

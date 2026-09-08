@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: bb2a01e22a16233429469e99b53a0985
+guid: 02d11f75aef0ca1409eda85a295cff37
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2367884239174609915
-    second: back-fade_0
+      213: 5792684158250889400
+    second: fly zone_0
   - first:
-      213: 8250508355158696637
-    second: back-fade_1
+      213: -6730379029268798998
+    second: fly zone_1
   - first:
-      213: 3367214121627386912
-    second: back-fade_2
+      213: 1721124448921650245
+    second: fly zone_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,13 +106,57 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: back-fade_0
+      name: fly zone_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 621
+        width: 960
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b0b39c0d8fb36050800000000000000
+      internalID: 5792684158250889400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fly zone_1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 615
+        width: 956
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae1e1b49ee3e892a0800000000000000
+      internalID: -6730379029268798998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fly zone_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1922
-        height: 722
+        width: 960
+        height: 101
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,52 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 50450ce74d5932fd0800000000000000
-      internalID: -2367884239174609915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: back-fade_1
-      rect:
-        serializedVersion: 2
-        x: 238
-        y: 0
-        width: 164
-        height: 162
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: db260adc2a1bf7270800000000000000
-      internalID: 8250508355158696637
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: back-fade_2
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 0
-        width: 218
-        height: 218
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0248742476fbabe20800000000000000
-      internalID: 3367214121627386912
+      spriteID: 54407304199a2e710800000000000000
+      internalID: 1721124448921650245
       vertices: []
       indices: 
       edges: []
@@ -185,9 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      back-fade_0: -2367884239174609915
-      back-fade_1: 8250508355158696637
-      back-fade_2: 3367214121627386912
+      fly zone_0: 5792684158250889400
+      fly zone_1: -6730379029268798998
+      fly zone_2: 1721124448921650245
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
