@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerManager : MonoBehaviour
 {
+    public GameManager.Gamemode startGameMode = GameManager.Gamemode.Cube;
+
     [SerializeField] private Sprite cubeSprite, shipSprite;
     private SpriteRenderer spriteRenderer;
 
@@ -14,11 +16,13 @@ public class PlayerManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         jumpAction = InputSystem.actions.FindAction("Jump");
+
+        SwitchGamemode(startGameMode);
     }
 
     private void Update()
     {
-        if (jumpAction.WasPressedThisFrame()) print("Jump!");
+        if (jumpAction.IsPressed()) print("Jump!");
     }
 
     public void SwitchGamemode(GameManager.Gamemode gamemode)
