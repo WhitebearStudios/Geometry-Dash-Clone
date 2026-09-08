@@ -1,16 +1,35 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Sprite cubeSprite, shipSprite;
+    private SpriteRenderer spriteRenderer;
+
+    private InputAction jumpAction;
+
+    void Awake()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        jumpAction = InputSystem.actions.FindAction("Jump");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (jumpAction.WasPressedThisFrame()) print("Jump!");
+    }
+
+    public void SwitchGamemode(GameManager.Gamemode gamemode)
+    {
+        if(gamemode == GameManager.Gamemode.Cube)
+        {
+            spriteRenderer.sprite = cubeSprite;
+        }
+        else if (gamemode == GameManager.Gamemode.Ship)
+        {
+            spriteRenderer.sprite = shipSprite;
+        }
     }
 }
