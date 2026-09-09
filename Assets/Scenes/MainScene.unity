@@ -10759,8 +10759,8 @@ MonoBehaviour:
   cubeSprite: {fileID: 21300000, guid: 39a92341648136f43a6ab9bdf8a7efd5, type: 3}
   shipSprite: {fileID: 21300000, guid: bda560e964df0cf4e9c99bfaa29456f6, type: 3}
   spriteRenderer: {fileID: 1994792881}
-  movement: {fileID: 0}
-  playerKaboom: {fileID: 0}
+  playerKaboom: {fileID: 579869843}
+  playerTrail: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
