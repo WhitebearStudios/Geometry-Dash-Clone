@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform visualsTransform;
 
     private Rigidbody2D rb;
-    private bool isGrounded = false;
+    private bool isGrounded = true;
 
     private InputAction jumpAction;
 
@@ -21,6 +21,12 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         jumpAction = InputSystem.actions.FindAction("Jump");
+    }
+
+    public void ResetMovement()
+    {
+        isGrounded = true;
+        transform.position = GameManager.playerStartPos;
     }
 
     private void Update()
@@ -55,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
             float nearest90 = Mathf.Round(currRot / 90) * 90;
 
             visualsTransform.eulerAngles = Vector3.forward * nearest90;
+        }
+        //Check for spikes
+        else if((manager.spikesLayer.value & (1 << collision.gameObject.layer)) != 0)
+        {
+            manager.PlayerHitSpike();
+            StartCoroutine(GameManager.Singleton.ResetLevelCoroutine(GameManager.resetLevelAfterDeathDelay));
         }
     }
 }

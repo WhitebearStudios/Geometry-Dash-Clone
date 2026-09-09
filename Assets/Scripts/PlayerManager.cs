@@ -7,19 +7,26 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private Sprite cubeSprite, shipSprite;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    public ParticleSystem playerKaboom, playerTrail;
     public GameManager.Gamemode CurrMode { get; private set; }
 
     
 
     public LayerMask groundLayer, spikesLayer;
     
-
-    void Awake()
+    //Called right when player hits spike
+    public void PlayerHitSpike()
     {
-        SwitchGamemode(startGameMode);
+        playerKaboom.Play();
+        playerTrail.Stop();
+        spriteRenderer.sprite = null;
     }
 
-    
+    public void ResetPlayer()
+    {
+        SwitchGamemode(startGameMode);
+        playerTrail.Play();
+    }
 
     public void SwitchGamemode(GameManager.Gamemode gamemode)
     {
