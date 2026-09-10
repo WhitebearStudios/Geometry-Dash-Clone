@@ -25,7 +25,7 @@ public class FloorScroller : MonoBehaviour
         // Check how far the parent has moved
         float diff = parentTransform.position.x - lastPos.x;
         //Change our offset
-        currentOffset.x += diff * scrollScale;
+        currentOffset.x -= diff * scrollScale;
 
         //print(currentOffset.x);
 

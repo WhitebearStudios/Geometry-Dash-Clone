@@ -11,10 +11,11 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Singleton { get; private set; }
 
-    public static readonly Vector3 playerStartPos = new(-4.5144f, -2.0091f, 0);
-    public static readonly Vector3 levelStartPos = Vector3.zero;
+    public static readonly Vector3 playerStartPos = new(-4.5144f, -3.071576f, 0);
+    public static readonly Vector3 levelStartPos = new(0, -0.58f, 0);
     public const float resetLevelAfterDeathDelay = 2f;
-    public float levelSpeed = 1;
+    public float levelSpeedMultiplier = 1;
+    public float levelBaseSpeed = 30;
 
     [SerializeField] private PlayerManager player;
     [SerializeField] private Transform levelTransform;
@@ -31,9 +32,9 @@ public class GameManager : MonoBehaviour
         ResetLevel();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if(advanceLevel) levelTransform.position += levelSpeed * Time.deltaTime * Vector3.left;
+        if(advanceLevel) levelTransform.position += levelBaseSpeed * levelSpeedMultiplier * Time.deltaTime * Vector3.left;
     }
 
     void ResetLevel()
@@ -42,11 +43,14 @@ public class GameManager : MonoBehaviour
         levelTransform.position = levelStartPos;
 
         advanceLevel = true;
+        AudioManager.instance.RestartMusic();
     }
 
     public IEnumerator ResetLevelCoroutine(float delay)
     {
         advanceLevel = false;
+        AudioManager.instance.StopMusic();
+        AudioManager.instance.PlaySFX(AudioManager.instance.dieSFX);
 
         yield return new WaitForSeconds(delay);
 
