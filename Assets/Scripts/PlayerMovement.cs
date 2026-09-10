@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float shipAccel = 100, maxShipVel = 15;
 
     [SerializeField] private TileBase coinTile;
-    [SerializeField] private TileBase shipPortalTileTop, shipPortalTileBottom, cubePortalTileTop, cubePortalTileBottom;
+    public TileBase shipPortalTileTop, shipPortalTileBottom, cubePortalTileTop, cubePortalTileBottom, orbTile, padTile;
     [SerializeField] Tilemap specialTiles;
 
 
@@ -44,19 +44,17 @@ public class PlayerMovement : MonoBehaviour
         {
             //print("Jump!");
 
-            if(manager.CurrMode == GameManager.Gamemode.Cube && isGrounded)
+            if(manager.CurrMode == GameManager.Gamemode.Cube)
             {
-                // Reset Y velocity for consistent jump height
-                rb.linearVelocityY = 0;
-
-                rb.AddForceY(jumpForce, ForceMode2D.Impulse);
+                if(isGrounded || CheckForTile(orbTile)) Jump();
             }
             else if(manager.CurrMode == GameManager.Gamemode.Ship)
             {
                 rb.linearVelocityY = Mathf.Clamp(rb.linearVelocityY + shipAccel * Time.deltaTime, -maxShipVel, maxShipVel);
-            }
+                isGrounded = false;
 
-            isGrounded = false;
+                if(jumpAction.WasPressedThisFrame() && CheckForTile(orbTile)) Jump();
+            }
         }
 
         if (!isGrounded && manager.CurrMode == GameManager.Gamemode.Cube)
@@ -72,12 +70,33 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocityY = Mathf.Clamp(rb.linearVelocityY, -maxShipVel, maxShipVel);
         }
     }
+    void Jump()
+    {
+        // Reset Y velocity for consistent jump height
+        rb.linearVelocityY = 0;
+
+        rb.AddForceY(jumpForce, ForceMode2D.Impulse);
+
+        isGrounded = false;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if colliding with the ground
         if ((manager.groundLayer.value & (1 << collision.gameObject.layer)) != 0)
         {
+            //Explode if hitting a wall
+            Vector2 myPos = new(transform.position.x, transform.position.y);
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if(Mathf.Abs(contact.normal.x) > 0.851f) //If hit point was far to the side we must have hit a wall. cos45 ~ 0.851
+                {
+                    manager.PlayerHitSpike();
+                    StartCoroutine(GameManager.Singleton.ResetLevelCoroutine(GameManager.resetLevelAfterDeathDelay));
+                    return;
+                }
+            }
+
             isGrounded = true;
 
             //Snap to nearest 90 degrees
@@ -133,7 +152,35 @@ public class PlayerMovement : MonoBehaviour
                 {
                     manager.SwitchGamemode(GameManager.Gamemode.Cube);
                 }
+                else if (hitTile == padTile) Jump();
             }
         }
+    }
+
+    public bool CheckForTile(TileBase tile)
+    {
+        Vector3Int[] checkOffsets = new Vector3Int[9]
+            {
+                Vector3Int.zero,
+                Vector3Int.left,
+                Vector3Int.right,
+                Vector3Int.up,
+                Vector3Int.down,
+                Vector3Int.left + Vector3Int.down,
+                Vector3Int.left + Vector3Int.up,
+                Vector3Int.right + Vector3Int.down,
+                Vector3Int.right + Vector3Int.up
+            };
+
+        foreach (Vector3Int offset in checkOffsets)
+        {
+            // Push the contact point slightly inward toward the tile to prevent rounding errors
+            Vector3Int cellPosition = specialTiles.WorldToCell(transform.position) + offset;
+
+            TileBase hitTile = specialTiles.GetTile(cellPosition);
+
+            if (hitTile == tile) return true;
+        }
+        return false;
     }
 }
