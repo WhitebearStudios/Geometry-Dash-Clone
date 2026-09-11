@@ -11343,6 +11343,7 @@ MonoBehaviour:
   sfxSource: {fileID: 1477638233}
   backgroundMusic: {fileID: 8300000, guid: 8208bce486faa4b45bfea36dda915ba0, type: 3}
   dieSFX: {fileID: 8300000, guid: 228c129abdb11d443807b532acf5ae3c, type: 3}
+  levelCompleteSFX: {fileID: 8300000, guid: a8b5b12bbb0fdec4aa95cf94dfa56a94, type: 3}
 --- !u!82 &1477638233
 AudioSource:
   m_ObjectHideFlags: 0

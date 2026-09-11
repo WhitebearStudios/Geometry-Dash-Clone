@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     [Header("---- Audio Clips ----")]
     public AudioClip backgroundMusic;
     public AudioClip dieSFX;
+    public AudioClip levelCompleteSFX;
 
     private void Awake()
     {

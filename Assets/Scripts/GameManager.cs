@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public const float resetLevelAfterDeathDelay = 2f;
     public float levelSpeedMultiplier = 1;
     public float levelBaseSpeed = 30;
+    public bool LevelComplete { get; private set; }
 
     [SerializeField] private PlayerManager player;
     [SerializeField] private Camera camera;
@@ -43,7 +44,13 @@ public class GameManager : MonoBehaviour
         if(advanceLevel)
         {
             if (camera.ViewportToWorldPoint(Vector3.right).x < levelEnd + levelTransform.position.x) levelTransform.position += levelBaseSpeed * levelSpeedMultiplier * Time.deltaTime * Vector3.left;
-            else levelCompleteText.SetActive(true);
+            else if (!LevelComplete)
+            {
+                levelCompleteText.SetActive(true);
+                AudioManager.instance.PlaySFX(AudioManager.instance.levelCompleteSFX);
+                AudioManager.instance.StopMusic();
+                LevelComplete = true;
+            }
         }
     }
 
