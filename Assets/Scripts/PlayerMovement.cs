@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float jumpForce = 5;
     const float rotationSpeed = -180 / 0.5f;
-    public float shipAccel = 100, maxShipVel = 15;
+    public float shipAccel = 100, maxShipVel = 15, levelEndAnimForce = 10;
 
     [SerializeField] private TileBase coinTile;
     public TileBase shipPortalTileTop, shipPortalTileBottom, cubePortalTileTop, cubePortalTileBottom, orbTile, padTile;
@@ -70,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (transform.position.y > 5) transform.position = new Vector3(transform.position.x, 5, transform.position.z);
+
+        if (GameManager.Singleton.LevelComplete && transform.position.x < GameManager.Singleton.levelEnd) rb.AddForce(levelEndAnimForce * new Vector2(1, 1));
     }
     void Jump()
     {
