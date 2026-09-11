@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private TileBase coinTile;
     public TileBase shipPortalTileTop, shipPortalTileBottom, cubePortalTileTop, cubePortalTileBottom, orbTile, padTile;
-    [SerializeField] Tilemap specialTiles;
 
 
     private PlayerManager manager;
@@ -46,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
             if(manager.CurrMode == GameManager.Gamemode.Cube)
             {
-                if(isGrounded || CheckForTile(orbTile)) Jump();
+                if(isGrounded || (jumpAction.WasPressedThisFrame() && CheckForTile(orbTile))) Jump();
             }
             else if(manager.CurrMode == GameManager.Gamemode.Ship)
             {
@@ -69,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
             visualsTransform.eulerAngles = rb.linearVelocityY * 3 * Vector3.forward;
             rb.linearVelocityY = Mathf.Clamp(rb.linearVelocityY, -maxShipVel, maxShipVel);
         }
+
+        if (transform.position.y > 5) transform.position = new Vector3(transform.position.x, 5, transform.position.z);
     }
     void Jump()
     {
@@ -134,15 +135,15 @@ public class PlayerMovement : MonoBehaviour
             foreach (Vector3Int offset in checkOffsets)
             {
                 // Push the contact point slightly inward toward the tile to prevent rounding errors
-                Vector3Int cellPosition = specialTiles.WorldToCell(transform.position) + offset;
+                Vector3Int cellPosition = GameManager.Singleton.specialTiles.WorldToCell(transform.position) + offset;
 
-                TileBase hitTile = specialTiles.GetTile(cellPosition);
+                TileBase hitTile = GameManager.Singleton.specialTiles.GetTile(cellPosition);
 
                 // 5. Check if it matches your special tile
                 if (hitTile == coinTile && offset.y > -2)
                 {
                     CoinManager.Instance.GotCoin();
-                    specialTiles.SetTile(cellPosition, null); //Delete from tileMap
+                    GameManager.Singleton.specialTiles.SetTile(cellPosition, null); //Delete from tileMap
                 }
                 else if (hitTile == shipPortalTileTop || hitTile == shipPortalTileBottom)
                 {
@@ -175,9 +176,9 @@ public class PlayerMovement : MonoBehaviour
         foreach (Vector3Int offset in checkOffsets)
         {
             // Push the contact point slightly inward toward the tile to prevent rounding errors
-            Vector3Int cellPosition = specialTiles.WorldToCell(transform.position) + offset;
+            Vector3Int cellPosition = GameManager.Singleton.specialTiles.WorldToCell(transform.position) + offset;
 
-            TileBase hitTile = specialTiles.GetTile(cellPosition);
+            TileBase hitTile = GameManager.Singleton.specialTiles.GetTile(cellPosition);
 
             if (hitTile == tile) return true;
         }
